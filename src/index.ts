@@ -2,9 +2,9 @@ import express, { Request, Response } from 'express';
 import bodyParser from 'body-parser';
 
 
-const app = express();
+export const app = express();
 const port = process.env.PORT || 3000;
-
+const courses = [{id: 1, title: 'title 1'}, {id: 1, title: 'title 2'}];
 const products = [{id: 1, title: 'tomato'}, {id: 2, title: 'orange'}];
 const addresses = [{id: 1, value: 'Nezalejnasti 12'}, {id: 2, value: 'Selickaga 11'}];
 
@@ -74,6 +74,11 @@ app.get('/addresses/:id', (req: Request, res: Response) => {
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello Word!');
+})
+
+app.delete('/__test__/data', (req: Request, res: Response) => {
+  products.splice(0, products.length);
+  res.sendStatus(204);
 })
 
 app.listen(port, () => {
